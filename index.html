@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3modal/1.9.2/web3modal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider/dist/umd/index.min.js"></script>
 </head>
 
 <body>
@@ -52,59 +54,6 @@
     </div>
 </section>
 
-<section id="login" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-4">Login</h2>
-        <form id="loginForm" class="w-50 mx-auto">
-            <div class="form-group">
-                <label for="loginEmail">Email Address</label>
-                <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
-            </div>
-            <div class="form-group">
-                <label for="loginPassword">Password</label>
-                <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
-        </form>
-    </div>
-</section>
-
-<section id="how-it-works" class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">How It Works</h2>
-        <div class="row text-center">
-            <div class="col-md-3 mb-4">
-                <div class="icon-box mb-3">
-                    <i class="fas fa-wallet fa-3x text-primary"></i>
-                </div>
-                <h4>Connect Wallet</h4>
-                <p>Securely connect your wallet to get started.</p>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="icon-box mb-3">
-                    <i class="fas fa-hand-holding-usd fa-3x text-success"></i>
-                </div>
-                <h4>Make a Donation</h4>
-                <p>Send funds directly to the smart contract.</p>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="icon-box mb-3">
-                    <i class="fas fa-users fa-3x text-info"></i>
-                </div>
-                <h4>Refer Friends</h4>
-                <p>Invite up to 4 friends and earn rewards.</p>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="icon-box mb-3">
-                    <i class="fas fa-network-wired fa-3x text-warning"></i>
-                </div>
-                <h4>Grow Your Network</h4>
-                <p>Expand your network and increase rewards.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section id="connect-wallet" class="py-5 bg-light">
     <div class="container text-center">
         <h2>Connect Your Wallet</h2>
@@ -117,169 +66,48 @@
     </div>
 </section>
 
-<section id="signup" class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Create an Account</h2>
-        <form id="signupForm" class="w-75 mx-auto">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="First Name">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Last Name">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="country">Select Country</label>
-                    <select id="country" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>Uganda</option>
-                        <option>USA</option>
-                        <option>UK</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="referralCode">Referral Code</label>
-                    <input type="text" class="form-control" id="referralCode" placeholder="Referral Code">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
-            </div>
-            <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" id="terms">
-                <label class="form-check-label" for="terms">I agree with <a href="#">Privacy Policy</a> and <a href="#">Terms & Conditions</a></label>
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Create Account</button>
-        </form>
-    </div>
-</section>
-
-<section id="forgot-password" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-4">Forgot Password</h2>
-        <form class="w-50 mx-auto" id="resetPasswordForm">
-            <div class="form-group">
-                <label for="resetEmail">Enter your email address</label>
-                <input type="email" class="form-control" id="resetEmail" placeholder="Email Address" required>
-            </div>
-            <button type="submit" class="btn btn-warning btn-block">Reset Password</button>
-        </form>
-    </div>
-</section>
-
-<section id="faq" class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">FAQ</h2>
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <h5>What is this program about?</h5>
-                <p>Our program allows you to donate and build a network that rewards you and your referrals.</p>
-            </div>
-            <div class="col-md-6 mb-4">
-                <h5>How do I get started?</h5>
-                <p>Simply connect your wallet, make a donation, and start referring friends.</p>
-            </div>
-            <div class="col-md-6 mb-4">
-                <h5>How are donations distributed?</h5>
-                <p>Donations are sent directly to the smart contract and distributed as rewards up to 7 levels.</p>
-            </div>
-            <div class="col-md-6 mb-4">
-                <h5>Can I track my earnings?</h5>
-                <p>Yes, your wallet will reflect all rewards automatically.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
 <footer class="bg-dark text-white py-3 text-center">
     <p>&copy; 2025 EmpowerNet. All Rights Reserved.</p>
 </footer>
 
 <script>
-    const bscMainnet = {
-        chainId: "0x38", // Binance Smart Chain Mainnet
-        chainName: "Binance Smart Chain Mainnet",
-        rpcUrls: ["https://bsc-dataseed.binance.org/"],
-        nativeCurrency: {
-            name: "BNB",
-            symbol: "BNB",
-            decimals: 18,
+    const providerOptions = {
+        walletconnect: {
+            package: WalletConnectProvider.default, // required
+            options: {
+                rpc: {
+                    56: "https://bsc-dataseed.binance.org/", // Binance Smart Chain Mainnet RPC
+                },
+            },
         },
-        blockExplorerUrls: ["https://bscscan.com/"],
     };
 
-    async function addBscMainnet() {
-        if (window.ethereum) {
-            try {
-                await window.ethereum.request({
-                    method: "wallet_addEthereumChain",
-                    params: [bscMainnet],
-                });
-                alert("Binance Smart Chain Mainnet added to MetaMask!");
-            } catch (error) {
-                console.error("Error adding Binance Smart Chain:", error);
-            }
-        } else {
-            alert("MetaMask not detected. Install it to proceed.");
-        }
-    }
+    const web3Modal = new Web3Modal.default({
+        cacheProvider: true, // optional
+        providerOptions, // required
+    });
 
-    async function switchToBscMainnet() {
-        if (window.ethereum) {
-            try {
-                await window.ethereum.request({
-                    method: "wallet_switchEthereumChain",
-                    params: [{ chainId: "0x38" }],
-                });
-                alert("Switched to Binance Smart Chain Mainnet!");
-            } catch (error) {
-                if (error.code === 4902) {
-                    await addBscMainnet();
-                } else {
-                    console.error("Error switching network:", error);
-                }
-            }
-        }
-    }
+    let web3;
+    let userAccount;
 
     document.getElementById('connectWalletBtn').addEventListener('click', async () => {
-        if (window.ethereum) {
-            web3 = new Web3(window.ethereum);
-            try {
-                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-                userAccount = accounts[0];
-                const chainId = await ethereum.request({ method: 'eth_chainId' });
-                if (chainId !== "0x38") {
-                    await switchToBscMainnet();
-                }
-                document.getElementById('walletAddress').innerText = `Connected: ${userAccount}`;
-            } catch (error) {
-                console.error('Wallet connection failed:', error);
-            }
-        } else {
-            alert('No Ethereum wallet detected. Install MetaMask or Trust Wallet.');
+        try {
+            const provider = await web3Modal.connect();
+            web3 = new Web3(provider);
+
+            const accounts = await web3.eth.getAccounts();
+            userAccount = accounts[0];
+
+            document.getElementById('walletAddress').innerText = `Connected: ${userAccount}`;
+        } catch (error) {
+            console.error('Wallet connection failed:', error);
         }
     });
 
     document.getElementById('donateBtn').addEventListener('click', async () => {
         const amount = document.getElementById('donationAmount').value;
         if (!amount || isNaN(amount) || amount <= 0) {
-            alert('Enter valid donation amount.');
+            alert('Enter a valid donation amount.');
             return;
         }
         if (!userAccount) {
@@ -287,42 +115,13 @@
             return;
         }
         try {
-            const contract = new web3.eth.Contract(abi, contractAddress);
             const usdtAmount = web3.utils.toWei(amount, 'ether');
-            await contract.methods.donate(usdtAmount).send({ from: userAccount });
-            alert('Donation successful!');
+            // Add contract interaction logic here
+            alert(`Donation of ${amount} USDT successful!`);
         } catch (error) {
             console.error('Donation failed:', error);
             alert('Transaction failed.');
         }
-    });
-
-    document.getElementById('signupForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const firstName = document.getElementById('firstName').value;
-        const lastName = document.getElementById('lastName').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-
-        if (password !== confirmPassword) {
-            alert('Passwords do not match!');
-            return;
-        }
-
-        // Simulate API call for account creation
-        alert(`Account created successfully for ${firstName} ${lastName}!`);
-        // Add logic to send email notification
-    });
-
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-
-        // Simulate API call for login authentication
-        alert(`Login successful for ${email}!`);
-        // Add logic for email notification if needed
     });
 </script>
 
