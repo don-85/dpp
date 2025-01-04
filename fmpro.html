@@ -1,0 +1,285 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="csrf-token" content="PRXmcuJRxNKOng8uh4PkYeHqgT57v20xgggz2aJE">
+    <title>Donation Program - How It Works</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Donation Program</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link text-white" href="#how-it-works">How It Works</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#connect-wallet">Connect Wallet</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#signup">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#faq">FAQ</a></li>
+                </ul>                
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section id="hero" class="py-5 text-white text-center" style="background: linear-gradient(45deg, #58cce9, #58cce9, #58cce9); background-size: 400% 400%; animation: gradientBG 15s ease infinite;">
+    <style>
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+    <div class="container">
+        <h1 class="display-4 animate__animated animate__fadeInDown">Join the Donation Network</h1>
+        <p class="lead animate__animated animate__fadeInUp">Connect, donate, and grow your network to make an impact globally.</p>
+        <a href="#connect-wallet" class="btn btn-primary btn-lg mt-3 animate__animated animate__zoomIn">Get Started</a>
+    </div>
+</section>
+
+<section id="how-it-works" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">How It Works</h2>
+        <div class="row text-center">
+            <div class="col-md-3 mb-4">
+                <div class="icon-box mb-3">
+                    <i class="fas fa-wallet fa-3x text-primary"></i>
+                </div>
+                <h4>Connect Wallet</h4>
+                <p>Securely connect your wallet to get started.</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="icon-box mb-3">
+                    <i class="fas fa-hand-holding-usd fa-3x text-success"></i>
+                </div>
+                <h4>Make a Donation</h4>
+                <p>Send funds directly to the smart contract.</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="icon-box mb-3">
+                    <i class="fas fa-users fa-3x text-info"></i>
+                </div>
+                <h4>Refer Friends</h4>
+                <p>Invite up to 4 friends and earn rewards.</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="icon-box mb-3">
+                    <i class="fas fa-network-wired fa-3x text-warning"></i>
+                </div>
+                <h4>Grow Your Network</h4>
+                <p>Expand your network and increase rewards.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="connect-wallet" class="py-5 bg-light">
+    <div class="container text-center">
+        <h2>Connect Your Wallet</h2>
+        <button id="connectWalletBtn" class="btn btn-primary btn-lg mt-3">Connect Wallet</button>
+        <div id="walletAddress" class="mt-3 text-success"></div>
+
+        <h4 class="mt-5">Make a Donation</h4>
+        <input type="number" id="donationAmount" class="form-control w-50 mx-auto mt-3" placeholder="Enter donation amount in USDT">
+        <button id="donateBtn" class="btn btn-success btn-lg mt-3">Donate</button>
+    </div>
+</section>
+
+<section id="signup" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Create an Account</h2>
+        <form class="w-75 mx-auto">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="country">Select Country</label>
+                    <select id="country" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>Uganda</option>
+                        <option>USA</option>
+                        <option>UK</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="referralCode">Referral Code</label>
+                    <input type="text" class="form-control" id="referralCode" placeholder="Referral Code">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+            </div>
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" id="terms">
+                <label class="form-check-label" for="terms">I agree with <a href="#">Privacy Policy</a> and <a href="#">Terms & Conditions</a></label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Create Account</button>
+        </form>
+    </div>
+</section>
+
+<section id="forgot-password" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Forgot Password</h2>
+        <form class="w-50 mx-auto" id="resetPasswordForm">
+            <div class="form-group">
+                <label for="resetEmail">Enter your email address</label>
+                <input type="email" class="form-control" id="resetEmail" placeholder="Email Address" required>
+            </div>
+            <button type="submit" class="btn btn-warning btn-block">Reset Password</button>
+        </form>
+    </div>
+</section>
+
+<section id="faq" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">FAQ</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <h5>What is this program about?</h5>
+                <p>Our program allows you to donate and build a network that rewards you and your referrals.</p>
+            </div>
+            <div class="col-md-6 mb-4">
+                <h5>How do I get started?</h5>
+                <p>Simply connect your wallet, make a donation, and start referring friends.</p>
+            </div>
+            <div class="col-md-6 mb-4">
+                <h5>How are donations distributed?</h5>
+                <p>Donations are sent directly to the smart contract and distributed as rewards up to 7 levels.</p>
+            </div>
+            <div class="col-md-6 mb-4">
+                <h5>Can I track my earnings?</h5>
+                <p>Yes, your wallet will reflect all rewards automatically.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-dark text-white py-3 text-center">
+    <p>&copy; 2025 Donation Program. All Rights Reserved.</p>
+</footer>
+
+<script>
+    const bscMainnet = {
+        chainId: "0x38", // Binance Smart Chain Mainnet
+        chainName: "Binance Smart Chain Mainnet",
+        rpcUrls: ["https://bsc-dataseed.binance.org/"],
+        nativeCurrency: {
+            name: "BNB",
+            symbol: "BNB",
+            decimals: 18,
+        },
+        blockExplorerUrls: ["https://bscscan.com/"],
+    };
+
+    async function addBscMainnet() {
+        if (window.ethereum) {
+            try {
+                await window.ethereum.request({
+                    method: "wallet_addEthereumChain",
+                    params: [bscMainnet],
+                });
+                alert("Binance Smart Chain Mainnet added to MetaMask!");
+            } catch (error) {
+                console.error("Error adding Binance Smart Chain:", error);
+            }
+        } else {
+            alert("MetaMask not detected. Install it to proceed.");
+        }
+    }
+
+    async function switchToBscMainnet() {
+        if (window.ethereum) {
+            try {
+                await window.ethereum.request({
+                    method: "wallet_switchEthereumChain",
+                    params: [{ chainId: "0x38" }],
+                });
+                alert("Switched to Binance Smart Chain Mainnet!");
+            } catch (error) {
+                if (error.code === 4902) {
+                    await addBscMainnet();
+                } else {
+                    console.error("Error switching network:", error);
+                }
+            }
+        }
+    }
+
+    document.getElementById('connectWalletBtn').addEventListener('click', async () => {
+        if (window.ethereum) {
+            web3 = new Web3(window.ethereum);
+            try {
+                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                userAccount = accounts[0];
+                const chainId = await ethereum.request({ method: 'eth_chainId' });
+                if (chainId !== "0x38") {
+                    await switchToBscMainnet();
+                }
+                document.getElementById('walletAddress').innerText = `Connected: ${userAccount}`;
+            } catch (error) {
+                console.error('Wallet connection failed:', error);
+            }
+        } else {
+            alert('No Ethereum wallet detected. Install MetaMask or Trust Wallet.');
+        }
+    });
+
+    document.getElementById('donateBtn').addEventListener('click', async () => {
+        const amount = document.getElementById('donationAmount').value;
+        if (!amount || isNaN(amount) || amount <= 0) {
+            alert('Enter valid donation amount.');
+            return;
+        }
+        if (!userAccount) {
+            alert('Connect your wallet first.');
+            return;
+        }
+        try {
+            const contract = new web3.eth.Contract(abi, contractAddress);
+            const usdtAmount = web3.utils.toWei(amount, 'ether');
+            await contract.methods.donate(usdtAmount).send({ from: userAccount });
+            alert('Donation successful!');
+        } catch (error) {
+            console.error('Donation failed:', error);
+            alert('Transaction failed.');
+        }
+    });
+</script>
+
+</body>
+
+</html>
