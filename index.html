@@ -13,6 +13,96 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Animated Gradient Background */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: linear-gradient(120deg, #1e3c72, #2a5298, #2b5876);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Blockchain Overlay */
+        #blockchain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: url('https://i.imgur.com/3bfB1ij.png'); /* A subtle blockchain network image */
+            background-size: cover;
+            opacity: 0.1;
+        }
+
+        /* Container Styling */
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-top: 10%;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid white;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Blockchain Network Overlay -->
+    <div id="blockchain-overlay"></div>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h1>EmpowerNet</h1>
+        <p>Join the Blockchain Revolution with a Secure and Transparent Network</p>
+        <a href="#connect-wallet" class="btn btn-lg">Get Started</a>
+    </div>
+
+    <script>
+        // Optional: Add interactivity to the background
+        document.body.addEventListener('mousemove', (event) => {
+            const x = event.clientX / window.innerWidth;
+            const y = event.clientY / window.innerHeight;
+            document.body.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+        });
+    </script>
 </head>
 
 <body>
@@ -72,7 +162,7 @@
     <div class="container">
         <h2 class="text-center mb-4">About Us</h2>
         <p>EmpowerNet is a global platform that connects individuals to create meaningful donations. Our mission is to
-            empower change through transparent and secure networks. Join us to make a difference today.</p>
+            empower change through transparent and secure networks. Join us to make a difference today</p>
     </div>
 </section>
 <!-- Contact Us Section -->
