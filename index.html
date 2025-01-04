@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content="PRXmcuJRxNKOng8uh4PkYeHqgT57v20xgggz2aJE">
-    <title>Empoweret - How It Works</title>
+    <title>EmpowerNet - How It Works</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -26,11 +26,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link text-white" href="#how-it-works">How It Works</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#connect-wallet">Connect Wallet</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#contact">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#privacy-policy">Privacy Policy</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#social-media">Social Media</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="#signup">Sign Up</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#login">Login</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#faq">FAQ</a></li>
                 </ul>                
             </div>
         </div>
@@ -68,7 +68,53 @@
         </form>
     </div>
 </section>
+<section id="about" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">About Us</h2>
+        <p>EmpowerNet is a global platform that connects individuals to create meaningful donations. Our mission is to
+            empower change through transparent and secure networks. Join us to make a difference today!</p>
+    </div>
+</section>
+<!-- Contact Us Section -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Contact Us</h2>
+        <form class="w-50 mx-auto">
+            <div class="form-group">
+                <label for="contactName">Name</label>
+                <input type="text" class="form-control" id="contactName" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <label for="contactEmail">Email</label>
+                <input type="email" class="form-control" id="contactEmail" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <label for="contactMessage">Message</label>
+                <textarea class="form-control" id="contactMessage" rows="4" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+        </form>
+    </div>
+</section>
+<!-- Privacy Policy Section -->
+<section id="privacy-policy" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Privacy Policy</h2>
+        <p>EmpowerNet values your privacy and ensures your data is safe. We do not share or sell your information
+            without consent. For more details, review our complete policy on data collection, usage, and protection.</p>
+    </div>
+</section>
 
+<!-- Social Media Links Section -->
+<section id="social-media" class="py-5">
+    <div class="container text-center">
+        <h2 class="mb-4">Follow Us</h2>
+        <a href="#" class="text-dark mx-3"><i class="fab fa-facebook fa-3x"></i></a>
+        <a href="#" class="text-dark mx-3"><i class="fab fa-twitter fa-3x"></i></a>
+        <a href="#" class="text-dark mx-3"><i class="fab fa-instagram fa-3x"></i></a>
+        <a href="#" class="text-dark mx-3"><i class="fab fa-linkedin fa-3x"></i></a>
+    </div>
+</section>
 <section id="how-it-works" class="py-5">
     <div class="container">
         <h2 class="text-center mb-4">How It Works</h2>
@@ -223,6 +269,108 @@
         blockExplorerUrls: ["https://bscscan.com/"],
     };
 
+    // Contract ABI
+    const abi = [
+        {
+            "inputs": [
+                { "internalType": "address", "name": "_usdtAddress", "type": "address" },
+                { "internalType": "address", "name": "_admin", "type": "address" }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                { "indexed": true, "internalType": "address", "name": "donor", "type": "address" },
+                { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" }
+            ],
+            "name": "DonationReceived",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                { "indexed": true, "internalType": "address", "name": "user", "type": "address" },
+                { "indexed": true, "internalType": "address", "name": "upline", "type": "address" }
+            ],
+            "name": "UserRegistered",
+            "type": "event"
+        },
+        {
+            "inputs": [],
+            "name": "MINIMUM_DONATION",
+            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "admin",
+            "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "bep20AdminWallet",
+            "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{ "internalType": "uint256", "name": "_amount", "type": "uint256" }],
+            "name": "donate",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "emergencyWithdraw",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{ "internalType": "address", "name": "_user", "type": "address" }],
+            "name": "getDownlines",
+            "outputs": [{ "internalType": "address[]", "name": "", "type": "address[]" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{ "internalType": "address", "name": "_upline", "type": "address" }],
+            "name": "register",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+            "name": "registeredUsers",
+            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "usdtAddress",
+            "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+            "name": "users",
+            "outputs": [{ "internalType": "address", "name": "upline", "type": "address" }],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ];
+
+    const contractAddress = '0x293577B0d791244C1868f0BC4a5a32F1411625Bd'; // Your contract address
+
     async function addBscMainnet() {
         if (window.ethereum) {
             try {
@@ -295,34 +443,6 @@
             console.error('Donation failed:', error);
             alert('Transaction failed.');
         }
-    });
-
-    document.getElementById('signupForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const firstName = document.getElementById('firstName').value;
-        const lastName = document.getElementById('lastName').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-
-        if (password !== confirmPassword) {
-            alert('Passwords do not match!');
-            return;
-        }
-
-        // Simulate API call for account creation
-        alert(`Account created successfully for ${firstName} ${lastName}!`);
-        // Add logic to send email notification
-    });
-
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-
-        // Simulate API call for login authentication
-        alert(`Login successful for ${email}!`);
-        // Add logic for email notification if needed
     });
 </script>
 
