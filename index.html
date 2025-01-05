@@ -162,7 +162,7 @@
     <div class="container">
         <h2 class="text-center mb-4">About Us</h2>
         <p>EmpowerNet is a global platform that connects individuals to create meaningful donations. Our mission is to
-            empower change through transparent and secure networks. Join us to make a difference today</p>
+            empower change through transparent and secure blockchain networks. Join us to make a difference today.</p>
     </div>
 </section>
 <!-- Contact Us Section -->
@@ -237,10 +237,11 @@
 <section id="social-media" class="py-5">
     <div class="container text-center">
         <h2 class="mb-4">Follow Us</h2>
-        <a href="#" class="text-dark mx-3"><i class="fab fa-facebook fa-3x"></i></a>
-        <a href="#" class="text-dark mx-3"><i class="fab fa-twitter fa-3x"></i></a>
-        <a href="#" class="text-dark mx-3"><i class="fab fa-instagram fa-3x"></i></a>
-        <a href="#" class="text-dark mx-3"><i class="fab fa-linkedin fa-3x"></i></a>
+        <a href="#" class="text-black mx-3"><i class="fab fa-facebook fa-3x"></i></a>
+        <a href="#" class="text-black mx-3"><i class="fab fa-twitter fa-3x"></i></a>
+        <a href="#" class="text-black mx-3"><i class="fab fa-instagram fa-3x"></i></a>
+        <a href="#" class="text-black mx-3"><i class="fab fa-linkedin fa-3x"></i></a>
+        <a href="#" class="text-black mx-3"><i class="fab fa-telegram fa-3x"></i></a>
     </div>
 </section>
 <section id="how-it-works" class="py-5">
@@ -314,9 +315,6 @@
                     <label for="country">Select Country</label>
                     <select id="country" class="form-control">
                         <option selected>Choose...</option>
-                        <option>Uganda</option>
-                        <option>USA</option>
-                        <option>UK</option>
                     </select>
                 </div>
             </div>
@@ -383,7 +381,44 @@
 <footer class="bg-dark text-white py-3 text-center">
     <p>&copy; 2025 EmpowerNet. All Rights Reserved.</p>
 </footer>
+<script>
+    // Array of countries
+    const countries = [
+        "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", 
+        "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", 
+        "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", 
+        "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", 
+        "Chad", "Chile", "China", "Colombia", "Comoros", "Congo (Democratic Republic)", "Congo (Republic)", 
+        "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", 
+        "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", 
+        "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", 
+        "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", 
+        "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", 
+        "Kazakhstan", "Kenya", "Kiribati", "Korea (North)", "Korea (South)", "Kosovo", "Kuwait", "Kyrgyzstan", 
+        "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", 
+        "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", 
+        "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", 
+        "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", 
+        "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", 
+        "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", 
+        "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", 
+        "San Marino", "São Tomé and Príncipe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", 
+        "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", 
+        "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", 
+        "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", 
+        "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", 
+        "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+    ];
 
+    // Populate the dropdown
+    const countryDropdown = document.getElementById("country");
+    countries.forEach(country => {
+        const option = document.createElement("option");
+        option.value = country;
+        option.textContent = country;
+        countryDropdown.appendChild(option);
+    });
+</script>
 <script>
     const bscMainnet = {
         chainId: "0x38", // Binance Smart Chain Mainnet
