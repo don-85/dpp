@@ -321,8 +321,9 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="referralCode">Referral Code</label>
-                    <input type="text" class="form-control" id="referralCode" placeholder="Referral Code">
+                    <input type="text" class="form-control" id="referralCode" placeholder="Referral Code" readonly>
                 </div>
+                <button class="btn btn-primary" onclick="generateReferralCode()">Generate Referral Code</button>
                 <div class="form-group col-md-6">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Password">
@@ -381,6 +382,30 @@
 <footer class="bg-dark text-white py-3 text-center">
     <p>&copy; 2025 EmpowerNet. All Rights Reserved.</p>
 </footer>
+<script>
+    let isFirstReferralCodeAssigned = false;
+
+    function generateReferralCode() {
+        if (!isFirstReferralCodeAssigned) {
+            alert("The first referral code is already assigned to the creator.");
+            return;
+        }
+
+        // Generate referral code for other users
+        const randomSuffix = Math.random().toString(36).substring(2, 8).toUpperCase(); // Random alphanumeric
+        const referralCode = randomSuffix;
+
+        // Set the generated code in the input field
+        document.getElementById("referralCode").value = referralCode;
+    }
+
+    // Automatically assign the first referral code to the creator
+    document.addEventListener("DOMContentLoaded", () => {
+        const firstReferralCode = "09S7IN"; // First unique referral code for the creator
+        document.getElementById("referralCode").value = firstReferralCode;
+        isFirstReferralCodeAssigned = true; // Mark the first referral code as assigned
+    });
+</script>
 <script>
     // Array of countries
     const countries = [
