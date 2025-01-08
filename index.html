@@ -388,49 +388,6 @@
     <p>&copy; 2025 EmpowerNet. All Rights Reserved.</p>
 </footer>
 <script>
-    const LOGIN_API_IP = "http://66.29.159.254";
-    const SHARED_IP = "http://198.187.29.23";
-
-    document.getElementById('loginForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value.trim();
-        const password = document.getElementById('loginPassword').value.trim();
-
-        if (!email || !password) {
-            alert('Please provide valid login details.');
-            return;
-        }
-
-        const referralCode = btoa(email).slice(0, 8);
-        const referralLink = `${SHARED_IP}/?ref=${referralCode}`;
-
-        try {
-            const response = await fetch(`${LOGIN_API_IP}/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password, referralCode }),
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                document.getElementById('referralLink').innerHTML = `
-                    <h5>Your Referral Link:</h5>
-                    <a href="${referralLink}" target="_blank" style="color: lightblue;">${referralLink}</a>
-                `;
-                alert('Login successful!');
-            } else {
-                alert(`Login failed: ${result.message}`);
-            }
-        } catch (error) {
-            console.error('Error during login:', error);
-            alert('An error occurred. Please try again later.');
-        }
-    });
-</script>
-<script>
     // Array of countries
     const countries = [
         "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", 
@@ -657,7 +614,91 @@
         }
     });
 </script>
+<script>
+    const LOGIN_API_IP = "http://66.29.159.254";
+    const SHARED_IP = "http://198.187.29.23";
 
+    let loggedInUser = null;
+
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+
+        if (!email || !password) {
+            alert('Please provide valid login details.');
+            return;
+        }
+
+        const referralCode = btoa(email).slice(0, 8);
+        const referralLink = `${SHARED_IP}/?ref=${referralCode}`;
+
+        try {
+            const response = await fetch(`${LOGIN_API_IP}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password, referralCode }),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                loggedInUser = { email, referralCode };
+                document.getElementById('referralLink').innerHTML = `
+                    <h5>Your Referral Link:</h5>
+                    <a href="${referralLink}" target="_blank" style="color: lightblue;">${referralLink}</a>
+                `;
+                alert('Login successful!');
+            } else {
+                alert(`Login failed: ${result.message}`);
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            alert('An error occurred. Please try again later.');
+        }
+    });
+
+    document.getElementById('donationForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (!loggedInUser) {
+            alert('You must be logged in to make a donation.');
+            return;
+        }
+
+        const amount = document.getElementById('donationAmount').value.trim();
+
+        if (!amount || isNaN(amount) || amount <= 0) {
+            alert('Please enter a valid donation amount.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`${LOGIN_API_IP}/donate`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: loggedInUser.email,
+                    amount,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert('Donation successful!');
+            } else {
+                alert(`Donation failed: ${result.message}`);
+            }
+        } catch (error) {
+            console.error('Error during donation:', error);
+            alert('An error occurred. Please try again later.');
+        }
+    });
+</script>
 </body>
 
 </html>
