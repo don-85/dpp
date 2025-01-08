@@ -104,10 +104,6 @@
                     <li class="nav-item"><a class="nav-link" href="#contact" style="color: white;">Contact Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="#privacy-policy" style="color: white;">Privacy Policy</a></li>
                     <li class="nav-item"><a class="nav-link" href="#connect-wallet" style="color: white;">Connect Your Wallet</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about" style="color: white;">How It Works</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#forgot-password" style="color: white;">Forgot Password</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#settings" style="color: white;">Settings</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#faq" style="color: white;">FAQ</a></li>
                 </ul>
             </div>
         </div>
@@ -143,6 +139,7 @@
             </div>
             <button type="submit" class="btn btn-primary btn-block" style="background-color: orange; color: black; font-family: 'Roboto', sans-serif; border-radius: 50px;">Login</button>
         </form>
+        <div id="referralLink" class="mt-3 text-center"></div>
     </div>
 </section>
 
@@ -217,7 +214,7 @@
         <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Policy Updates</h4>
         <p style="color: black;">Our privacy policy may be updated periodically to reflect changes in our services or legal requirements. We encourage you to review this policy regularly to stay informed.</p>
         
-        <p style="color: black; font-family: 'Roboto', sans-serif; font-size: 1rem;">For any questions or concerns about our privacy practices, feel free to contact us at <a href="mailto:support@empowernet.com" style="color: #007bff; text-decoration: none;">support@empowernet.com</a>.</p>
+        <p style="color: black; font-family: 'Roboto', sans-serif; font-size: 1rem;">For any questions or concerns about our privacy practices, feel free to contact us at <a href="mailto:support@empowernet.tech" style="color: #007bff; text-decoration: none;">support@empowernet.tech</a>.</p>
     </div>
 </section>
 
@@ -391,27 +388,46 @@
     <p>&copy; 2025 EmpowerNet. All Rights Reserved.</p>
 </footer>
 <script>
-    let isFirstReferralCodeAssigned = false;
+    const LOGIN_API_IP = "http://66.29.159.254";
+    const SHARED_IP = "http://198.187.29.23";
 
-    function generateReferralCode() {
-        if (!isFirstReferralCodeAssigned) {
-            alert("The first referral code is already assigned to the creator.");
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+
+        if (!email || !password) {
+            alert('Please provide valid login details.');
             return;
         }
 
-        // Generate referral code for other users
-        const randomSuffix = Math.random().toString(36).substring(2, 8).toUpperCase(); // Random alphanumeric
-        const referralCode = randomSuffix;
+        const referralCode = btoa(email).slice(0, 8);
+        const referralLink = `${SHARED_IP}/?ref=${referralCode}`;
 
-        // Set the generated code in the input field
-        document.getElementById("referralCode").value = referralCode;
-    }
+        try {
+            const response = await fetch(`${LOGIN_API_IP}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password, referralCode }),
+            });
 
-    // Automatically assign the first referral code to the creator
-    document.addEventListener("DOMContentLoaded", () => {
-        const firstReferralCode = "09S7IN"; // First unique referral code for the creator
-        document.getElementById("referralCode").value = firstReferralCode;
-        isFirstReferralCodeAssigned = true; // Mark the first referral code as assigned
+            const result = await response.json();
+
+            if (result.success) {
+                document.getElementById('referralLink').innerHTML = `
+                    <h5>Your Referral Link:</h5>
+                    <a href="${referralLink}" target="_blank" style="color: lightblue;">${referralLink}</a>
+                `;
+                alert('Login successful!');
+            } else {
+                alert(`Login failed: ${result.message}`);
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            alert('An error occurred. Please try again later.');
+        }
     });
 </script>
 <script>
