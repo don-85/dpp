@@ -134,28 +134,6 @@
             }
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .price-ticker {
-                flex-direction: column;
-                /* Stack items vertically on smaller screens */
-                font-size: 0.9rem;
-                /* Slightly reduce font size for better fit */
-                padding: 5px;
-                /* Adjust padding for smaller screens */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .price-ticker {
-                font-size: 0.8rem;
-                /* Further reduce font size for very small screens */
-            }
-        }
-
-        .price-ticker {
-            animation: scrollTicker 20s linear infinite;
-        }
     </style>
 </head>
 
@@ -187,39 +165,7 @@
                     </div>
                 </div>
             </nav>
-            <section class="price-ticker">
-                <div class="price-item">
-                    <img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png" alt="Bitcoin"
-                        class="price-logo">
-                    <div class="price-name">Bitcoin</div>
-                    <div class="price-value" id="btc-price">Loading...</div>
-                </div>
-                <div class="price-item">
-                    <img src="https://assets.coingecko.com/coins/images/279/large/ethereum.png" alt="Ethereum"
-                        class="price-logo">
-                    <div class="price-name">Ethereum</div>
-                    <div class="price-value" id="eth-price">Loading...</div>
-                </div>
-                <div class="price-item">
-                    <img src="https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png"
-                        alt="Binance Coin" class="price-logo">
-                    <div class="price-name">Binance Coin</div>
-                    <div class="price-value" id="bnb-price">Loading...</div>
-                </div>
-                <div class="price-item">
-                    <img src="https://assets.coingecko.com/coins/images/5/large/dogecoin.png" alt="Dogecoin"
-                        class="price-logo">
-                    <div class="price-name">Dogecoin</div>
-                    <div class="price-value" id="doge-price">Loading...</div>
-                </div>
-                <div class="price-item">
-                    <img src="https://assets.coingecko.com/coins/images/2/large/litecoin.png" alt="Litecoin"
-                        class="price-logo">
-                    <div class="price-name">Litecoin</div>
-                    <div class="price-value" id="ltc-price">Loading...</div>
-                </div>
-
-            </section>
+            
         </header>
 
         <section id="hero" class="py-5 text-white text-center"
