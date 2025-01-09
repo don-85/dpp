@@ -513,51 +513,56 @@
         countryDropdown.appendChild(option);
     });
 
-    // Sign Up Handler
-    $("#signupForm").on("submit", function (e) {
-        e.preventDefault();
-        const email = $("#email").val();
-        const password = $("#password").val();
+    // Base API URL
+const apiUrl = "https://empowernet.tech/api"; // Update with your actual API endpoint
 
-        $.post(`${apiUrl}/register`, { email, password })
-            .done(function (response) {
-                alert("Registration successful! Check your email for confirmation and referral link.");
-            })
-            .fail(function (error) {
-                alert("Error: " + error.responseJSON.message);
-            });
-    });
+// Sign-Up Handler
+$("#signupForm").on("submit", function (e) {
+    e.preventDefault();
+    const email = $("#email").val().trim();
+    const password = $("#password").val().trim();
 
-    // Login Handler
-    $("#loginForm").on("submit", function (e) {
-        e.preventDefault();
-        const email = $("#loginEmail").val();
-        const password = $("#loginPassword").val();
+    if (!email || !password) {
+        alert("Please fill out all fields.");
+        return;
+    }
 
-        $.post(`${apiUrl}/login`, { email, password })
-            .done(function (response) {
-                $("#login").hide();
-                $("#dashboard").show();
-                $("#referralLink").text(`Your referral link: ${response.referralLink}`);
-            })
-            .fail(function (error) {
-                alert("Error: " + error.responseJSON.message);
-            });
-    });
+    $.post(`${apiUrl}/register`, { email, password })
+        .done(function (response) {
+            alert("Registration successful! Check your email for confirmation and referral link.");
+            // Store the email and password locally for login purposes
+            localStorage.setItem("signupEmail", email);
+            localStorage.setItem("signupPassword", password);
+        })
+        .fail(function (error) {
+            const errorMessage = error.responseJSON?.message || "An unknown error occurred.";
+            alert("Error: " + errorMessage);
+        });
+});
 
-    // Donation Handler
-    $("#donationForm").on("submit", function (e) {
-        e.preventDefault();
-        const amount = $("#donationAmount").val();
+// Login Handler
+$("#loginForm").on("submit", function (e) {
+    e.preventDefault();
+    const email = $("#loginEmail").val().trim();
+    const password = $("#loginPassword").val().trim();
 
-        $.post(`${apiUrl}/donate`, { amount })
-            .done(function (response) {
-                alert("Donation successful! Thank you for your generosity.");
-            })
-            .fail(function (error) {
-                alert("Error: " + error.responseJSON.message);
-            });
-    });
+    if (!email || !password) {
+        alert("Please enter your email and password.");
+        return;
+    }
+
+    $.post(`${apiUrl}/login`, { email, password })
+        .done(function (response) {
+            $("#login").hide();
+            $("#dashboard").show();
+            $("#referralLink").text(`Your referral link: ${response.referralLink}`);
+            alert("Login successful!");
+        })
+        .fail(function (error) {
+            const errorMessage = error.responseJSON?.message || "An unknown error occurred.";
+            alert("Error: " + errorMessage);
+        });
+});
 </script>
 <script>
     const bscMainnet = {
@@ -749,7 +754,7 @@
     });
 </script>
 <script>
-    
+
     const SHARED_IP = "http://198.187.29.23";
 
     let loggedInUser = null;
