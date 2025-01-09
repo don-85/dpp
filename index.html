@@ -799,6 +799,26 @@ $("#loginForm").on("submit", function (e) {
         }
     });
 
+    const autoRegister = async () => {
+    try {
+        const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+        const userAddress = accounts[0];
+        const isRegistered = await contract.methods.isRegistered(userAddress).call();
+
+        if (!isRegistered) {
+            await contract.methods.registerUser().send({ from: userAddress });
+            alert("User registered successfully!");
+        }
+    } catch (error) {
+        console.error("Error during auto-registration:", error);
+    }
+};
+
+// Call autoRegister on wallet connect
+$("#connectWallet").on("click", async () => {
+    await autoRegister();
+});
+
     document.getElementById('donationForm').addEventListener('submit', async function (e) {
         e.preventDefault();
         if (!loggedInUser) {
