@@ -1,16 +1,16 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="PRXmcuJRxNKOng8uh4PkYeHqgT57v20xgggz2aJE">
     <title>EmpowerNet - How It Works</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -34,9 +34,11 @@
             0% {
                 background-position: 0% 50%;
             }
+
             50% {
                 background-position: 100% 50%;
             }
+
             100% {
                 background-position: 0% 50%;
             }
@@ -51,7 +53,8 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
-            background: url('https://i.imgur.com/3bfB1ij.png'); /* A subtle blockchain network image */
+            background: url('https://i.imgur.com/3bfB1ij.png');
+            /* A subtle blockchain network image */
             background-size: cover;
             opacity: 0.1;
         }
@@ -81,6 +84,7 @@
         .btn:hover {
             background: rgba(255, 255, 255, 0.4);
         }
+
         /* Price Ticker Styling */
         .price-ticker {
             display: flex;
@@ -89,8 +93,13 @@
             align-items: center;
             background: rgba(32, 8, 32, 0.7);
             color: white;
-            padding: 0;
+            padding: 10px;
+            /* Add some padding for better spacing */
             margin: 0;
+            font-size: 1rem;
+            /* Default font size */
+            overflow: hidden;
+            /* Ensure content doesn't overflow */
         }
 
         .price-item {
@@ -119,8 +128,28 @@
             0% {
                 transform: translateX(100%);
             }
+
             100% {
                 transform: translateX(-100%);
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .price-ticker {
+                flex-direction: column;
+                /* Stack items vertically on smaller screens */
+                font-size: 0.9rem;
+                /* Slightly reduce font size for better fit */
+                padding: 5px;
+                /* Adjust padding for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .price-ticker {
+                font-size: 0.8rem;
+                /* Further reduce font size for very small screens */
             }
         }
 
@@ -133,764 +162,842 @@
 <body>
     <!-- Blockchain Network Overlay -->
     <div id="blockchain-overlay"></div>
-</head>
+    </head>
 
-<body>
+    <body>
 
-<header>
-    <nav class="navbar navbar-expand-lg" style="background-color: black;">
-        <div class="container">
-            <a class="navbar-brand" href="#" style="color: white;">EmpowerNet</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" style="color: white;"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="#login" style="color: white;">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact" style="color: white;">Contact Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#privacy-policy" style="color: white;">Privacy Policy</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#connect-wallet" style="color: white;">Connect Your Wallet</a></li>
+        <header>
+            <nav class="navbar navbar-expand-lg" style="background-color: black;">
+                <div class="container">
+                    <a class="navbar-brand" href="#" style="color: white;">EmpowerNet</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon" style="color: white;"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="#login" style="color: white;">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#contact" style="color: white;">Contact
+                                    Us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#privacy-policy"
+                                    style="color: white;">Privacy Policy</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#connect-wallet"
+                                    style="color: white;">Connect Your Wallet</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <section class="price-ticker">
+                <div class="price-item">
+                    <img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png" alt="Bitcoin"
+                        class="price-logo">
+                    <div class="price-name">Bitcoin</div>
+                    <div class="price-value" id="btc-price">Loading...</div>
+                </div>
+                <div class="price-item">
+                    <img src="https://assets.coingecko.com/coins/images/279/large/ethereum.png" alt="Ethereum"
+                        class="price-logo">
+                    <div class="price-name">Ethereum</div>
+                    <div class="price-value" id="eth-price">Loading...</div>
+                </div>
+                <div class="price-item">
+                    <img src="https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png"
+                        alt="Binance Coin" class="price-logo">
+                    <div class="price-name">Binance Coin</div>
+                    <div class="price-value" id="bnb-price">Loading...</div>
+                </div>
+                <div class="price-item">
+                    <img src="https://assets.coingecko.com/coins/images/5/large/dogecoin.png" alt="Dogecoin"
+                        class="price-logo">
+                    <div class="price-name">Dogecoin</div>
+                    <div class="price-value" id="doge-price">Loading...</div>
+                </div>
+                <div class="price-item">
+                    <img src="https://assets.coingecko.com/coins/images/2/large/litecoin.png" alt="Litecoin"
+                        class="price-logo">
+                    <div class="price-name">Litecoin</div>
+                    <div class="price-value" id="ltc-price">Loading...</div>
+                </div>
+
+            </section>
+        </header>
+
+        <section id="hero" class="py-5 text-white text-center"
+            style="background: linear-gradient(45deg, #58cce9, #58cce9, #58cce9); background-size: 400% 400%; animation: gradientBG 15s ease infinite;">
+            <style>
+                @keyframes gradientBG {
+                    0% {
+                        background-position: 0% 50%;
+                    }
+
+                    50% {
+                        background-position: 100% 50%;
+                    }
+
+                    100% {
+                        background-position: 0% 50%;
+                    }
+                }
+            </style>
+            <div class="container">
+                <h1 class="display-4 animate__animated animate__fadeInDown">Join the Donation Network</h1>
+                <p class="lead animate__animated animate__fadeInUp">Connect, donate, and grow your network to make an
+                    impact globally.</p>
+                <a href="#connect-wallet" class="btn btn-primary btn-lg mt-3 animate__animated animate__zoomIn"
+                    style="color: black;">Get Started</a>
+            </div>
+        </section>
+
+        <section id="login" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif;">Login</h2>
+                <form id="loginForm" class="w-50 mx-auto">
+                    <div class="form-group">
+                        <label for="loginEmail" style="color: black; font-family: 'Roboto', sans-serif;">Email
+                            Address</label>
+                        <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required
+                            style="color: black; font-family: 'Roboto', sans-serif;">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword"
+                            style="color: black; font-family: 'Roboto', sans-serif;">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password"
+                            required style="color: black; font-family: 'Roboto', sans-serif;">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block"
+                        style="background-color: orange; color: black; font-family: 'Roboto', sans-serif; border-radius: 50px;">Login</button>
+                </form>
+                <div id="referralLink" class="mt-3 text-center"></div>
+            </div>
+        </section>
+
+        <section id="about" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif;">About Us</h2>
+                <p style="color: black; font-family: 'Roboto', sans-serif;">EmpowerNet is a global platform that
+                    connects individuals to create meaningful donations. Our mission is to
+                    empower change through transparent and secure blockchain networks. Join us to make a difference
+                    today.</p>
+            </div>
+        </section>
+        <!-- Contact Us Section -->
+        <section id="contact" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif;">Contact Us</h2>
+                <form class="w-50 mx-auto">
+                    <div class="form-group">
+                        <label for="contactName" style="color: black; font-family: 'Roboto', sans-serif;">Name</label>
+                        <input type="text" class="form-control" id="contactName" placeholder="Your Name" required
+                            style="color: black; font-family: 'Roboto', sans-serif;">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail" style="color: black; font-family: 'Roboto', sans-serif;">Email</label>
+                        <input type="email" class="form-control" id="contactEmail" placeholder="Your Email" required
+                            style="color: black; font-family: 'Roboto', sans-serif;">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage"
+                            style="color: black; font-family: 'Roboto', sans-serif;">Message</label>
+                        <textarea class="form-control" id="contactMessage" rows="4" placeholder="Your Message" required
+                            style="color: black; font-family: 'Roboto', sans-serif;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block"
+                        style="color: white; font-family: 'Roboto', sans-serif;">Send Message</button>
+                </form>
+            </div>
+        </section>
+        <!-- Privacy Policy Section -->
+        <section id="privacy-policy" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif; font-weight: 700;">
+                    Privacy Policy</h2>
+                <p style="color: black; font-family: 'Roboto', sans-serif; font-size: 1rem; line-height: 1.6;">
+                    At <strong>EmpowerNet</strong>, we are committed to safeguarding your privacy and ensuring that your
+                    personal data remains secure.
+                    We adhere to strict data protection standards and comply with all relevant privacy laws to maintain
+                    your trust.
+                </p>
+
+                <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">What Information We
+                    Collect</h4>
+                <p style="color: black;"><strong>Personal Information:</strong> When you register, we collect your name,
+                    email address, and other necessary details to create and manage your account.</p>
+                <p style="color: black;"><strong>Transaction Data:</strong> Any donations, payments, or transactions you
+                    make on our platform are securely logged to ensure transparency and accountability.</p>
+                <p style="color: black;"><strong>Technical Information:</strong> We may collect information about your
+                    device, browser, and IP address to enhance the security and functionality of our platform.</p>
+
+                <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">How We Use Your
+                    Information</h4>
+                <p style="color: black;"><strong>Account Management:</strong> To manage user accounts, process
+                    transactions, and provide personalized services.</p>
+                <p style="color: black;"><strong>Communication:</strong> To send you updates, respond to your queries,
+                    and notify you about changes to our services.</p>
+                <p style="color: black;"><strong>Security:</strong> To detect, prevent, and address any fraudulent
+                    activities or breaches.</p>
+
+                <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Your Privacy Is Our
+                    Priority</h4>
+                <p style="color: black;"><strong>No Unauthorized Sharing:</strong> EmpowerNet does not share, sell, or
+                    rent your personal information to third parties without your explicit consent.</p>
+                <p style="color: black;"><strong>Secure Data Handling:</strong> We use advanced encryption and secure
+                    servers to protect your data from unauthorized access.</p>
+                <p style="color: black;"><strong>Limited Access:</strong> Only authorized personnel have access to your
+                    information, and they are bound by strict confidentiality agreements.</p>
+
+                <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Your Rights</h4>
+                <p style="color: black;"><strong>Access and Control:</strong> You can review and update your personal
+                    information at any time.</p>
+                <p style="color: black;"><strong>Data Deletion:</strong> You can request the deletion of your data from
+                    our systems, subject to legal and regulatory requirements.</p>
+                <p style="color: black;"><strong>Consent Management:</strong> You have the right to manage your
+                    communication preferences and opt out of non-essential emails.</p>
+
+                <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Cookies and Tracking
+                    Technologies</h4>
+                <p style="color: black;">We may use cookies to improve your experience on our platform. Cookies help us:
+                </p>
+                <ul style="color: black; font-family: 'Roboto', sans-serif; font-size: 1rem; line-height: 1.6;">
+                    <li>Analyze user behavior to enhance our services.</li>
+                    <li>Remember your preferences for a smoother experience.</li>
                 </ul>
-            </div>
-        </div>
-    </nav>
-    <section class="price-ticker">
-        <div class="price-item">
-            <img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png" alt="Bitcoin" class="price-logo">
-            <div class="price-name">Bitcoin</div>
-            <div class="price-value" id="btc-price">Loading...</div>
-        </div>
-        <div class="price-item">
-            <img src="https://assets.coingecko.com/coins/images/279/large/ethereum.png" alt="Ethereum" class="price-logo">
-            <div class="price-name">Ethereum</div>
-            <div class="price-value" id="eth-price">Loading...</div>
-        </div>
-        <div class="price-item">
-            <img src="https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png" alt="Binance Coin" class="price-logo">
-            <div class="price-name">Binance Coin</div>
-            <div class="price-value" id="bnb-price">Loading...</div>
-        </div>
-        <div class="price-item">
-            <img src="https://assets.coingecko.com/coins/images/5/large/dogecoin.png" alt="Dogecoin" class="price-logo">
-            <div class="price-name">Dogecoin</div>
-            <div class="price-value" id="doge-price">Loading...</div>
-        </div>
-        <div class="price-item">
-            <img src="https://assets.coingecko.com/coins/images/2/large/litecoin.png" alt="Litecoin" class="price-logo">
-            <div class="price-name">Litecoin</div>
-            <div class="price-value" id="ltc-price">Loading...</div>
-        </div>
-        
-    </section>
-</header>
+                <p style="color: black;">You can control cookie preferences through your browser settings.</p>
 
-<section id="hero" class="py-5 text-white text-center" style="background: linear-gradient(45deg, #58cce9, #58cce9, #58cce9); background-size: 400% 400%; animation: gradientBG 15s ease infinite;">
-    <style>
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-    </style>
-    <div class="container">
-        <h1 class="display-4 animate__animated animate__fadeInDown">Join the Donation Network</h1>
-        <p class="lead animate__animated animate__fadeInUp">Connect, donate, and grow your network to make an impact globally.</p>
-        <a href="#connect-wallet" class="btn btn-primary btn-lg mt-3 animate__animated animate__zoomIn" style="color: black;">Get Started</a>
-    </div>
-</section>
+                <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Third-Party Services</h4>
+                <p style="color: black;">To provide a seamless user experience, we may partner with trusted third-party
+                    services for payment processing, analytics, or other functionalities. These partners are
+                    contractually obligated to protect your data and use it solely for the agreed-upon purposes.</p>
 
-<section id="login" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif;">Login</h2>
-        <form id="loginForm" class="w-50 mx-auto">
-            <div class="form-group">
-                <label for="loginEmail" style="color: black; font-family: 'Roboto', sans-serif;">Email Address</label>
-                <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required style="color: black; font-family: 'Roboto', sans-serif;">
-            </div>
-            <div class="form-group">
-                <label for="loginPassword" style="color: black; font-family: 'Roboto', sans-serif;">Password</label>
-                <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required style="color: black; font-family: 'Roboto', sans-serif;">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block" style="background-color: orange; color: black; font-family: 'Roboto', sans-serif; border-radius: 50px;">Login</button>
-        </form>
-        <div id="referralLink" class="mt-3 text-center"></div>
-    </div>
-</section>
+                <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Policy Updates</h4>
+                <p style="color: black;">Our privacy policy may be updated periodically to reflect changes in our
+                    services or legal requirements. We encourage you to review this policy regularly to stay informed.
+                </p>
 
-<section id="about" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif;">About Us</h2>
-        <p style="color: black; font-family: 'Roboto', sans-serif;">EmpowerNet is a global platform that connects individuals to create meaningful donations. Our mission is to
-            empower change through transparent and secure blockchain networks. Join us to make a difference today.</p>
-    </div>
-</section>
-<!-- Contact Us Section -->
-<section id="contact" class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif;">Contact Us</h2>
-        <form class="w-50 mx-auto">
-            <div class="form-group">
-                <label for="contactName" style="color: black; font-family: 'Roboto', sans-serif;">Name</label>
-                <input type="text" class="form-control" id="contactName" placeholder="Your Name" required style="color: black; font-family: 'Roboto', sans-serif;">
+                <p style="color: black; font-family: 'Roboto', sans-serif; font-size: 1rem;">For any questions or
+                    concerns about our privacy practices, feel free to contact us at <a
+                        href="mailto:support@empowernet.tech"
+                        style="color: #007bff; text-decoration: none;">support@empowernet.tech</a>.</p>
             </div>
-            <div class="form-group">
-                <label for="contactEmail" style="color: black; font-family: 'Roboto', sans-serif;">Email</label>
-                <input type="email" class="form-control" id="contactEmail" placeholder="Your Email" required style="color: black; font-family: 'Roboto', sans-serif;">
-            </div>
-            <div class="form-group">
-                <label for="contactMessage" style="color: black; font-family: 'Roboto', sans-serif;">Message</label>
-                <textarea class="form-control" id="contactMessage" rows="4" placeholder="Your Message" required style="color: black; font-family: 'Roboto', sans-serif;"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block" style="color: white; font-family: 'Roboto', sans-serif;">Send Message</button>
-        </form>
-    </div>
-</section>
-<!-- Privacy Policy Section -->
-<section id="privacy-policy" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif; font-weight: 700;">Privacy Policy</h2>
-        <p style="color: black; font-family: 'Roboto', sans-serif; font-size: 1rem; line-height: 1.6;">
-            At <strong>EmpowerNet</strong>, we are committed to safeguarding your privacy and ensuring that your personal data remains secure. 
-            We adhere to strict data protection standards and comply with all relevant privacy laws to maintain your trust.
-        </p>
-        
-        <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">What Information We Collect</h4>
-        <p style="color: black;"><strong>Personal Information:</strong> When you register, we collect your name, email address, and other necessary details to create and manage your account.</p>
-        <p style="color: black;"><strong>Transaction Data:</strong> Any donations, payments, or transactions you make on our platform are securely logged to ensure transparency and accountability.</p>
-        <p style="color: black;"><strong>Technical Information:</strong> We may collect information about your device, browser, and IP address to enhance the security and functionality of our platform.</p>
-        
-        <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">How We Use Your Information</h4>
-        <p style="color: black;"><strong>Account Management:</strong> To manage user accounts, process transactions, and provide personalized services.</p>
-        <p style="color: black;"><strong>Communication:</strong> To send you updates, respond to your queries, and notify you about changes to our services.</p>
-        <p style="color: black;"><strong>Security:</strong> To detect, prevent, and address any fraudulent activities or breaches.</p>
-        
-        <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Your Privacy Is Our Priority</h4>
-        <p style="color: black;"><strong>No Unauthorized Sharing:</strong> EmpowerNet does not share, sell, or rent your personal information to third parties without your explicit consent.</p>
-        <p style="color: black;"><strong>Secure Data Handling:</strong> We use advanced encryption and secure servers to protect your data from unauthorized access.</p>
-        <p style="color: black;"><strong>Limited Access:</strong> Only authorized personnel have access to your information, and they are bound by strict confidentiality agreements.</p>
-        
-        <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Your Rights</h4>
-        <p style="color: black;"><strong>Access and Control:</strong> You can review and update your personal information at any time.</p>
-        <p style="color: black;"><strong>Data Deletion:</strong> You can request the deletion of your data from our systems, subject to legal and regulatory requirements.</p>
-        <p style="color: black;"><strong>Consent Management:</strong> You have the right to manage your communication preferences and opt out of non-essential emails.</p>
-        
-        <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Cookies and Tracking Technologies</h4>
-        <p style="color: black;">We may use cookies to improve your experience on our platform. Cookies help us:</p>
-        <ul style="color: black; font-family: 'Roboto', sans-serif; font-size: 1rem; line-height: 1.6;">
-            <li>Analyze user behavior to enhance our services.</li>
-            <li>Remember your preferences for a smoother experience.</li>
-        </ul>
-        <p style="color: black;">You can control cookie preferences through your browser settings.</p>
-        
-        <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Third-Party Services</h4>
-        <p style="color: black;">To provide a seamless user experience, we may partner with trusted third-party services for payment processing, analytics, or other functionalities. These partners are contractually obligated to protect your data and use it solely for the agreed-upon purposes.</p>
-        
-        <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Policy Updates</h4>
-        <p style="color: black;">Our privacy policy may be updated periodically to reflect changes in our services or legal requirements. We encourage you to review this policy regularly to stay informed.</p>
-        
-        <p style="color: black; font-family: 'Roboto', sans-serif; font-size: 1rem;">For any questions or concerns about our privacy practices, feel free to contact us at <a href="mailto:support@empowernet.tech" style="color: #007bff; text-decoration: none;">support@empowernet.tech</a>.</p>
-    </div>
-</section>
+        </section>
 
 
-<!-- Social Media Links Section -->
-<section id="social-media" class="py-5">
-    <div class="container text-center">
-        <h2 class="mb-4">Follow Us</h2>
-        <a href="#" class="text-black mx-3"><i class="fab fa-facebook fa-3x"></i></a>
-        <a href="#" class="text-black mx-3"><i class="fab fa-twitter fa-3x"></i></a>
-        <a href="#" class="text-black mx-3"><i class="fab fa-instagram fa-3x"></i></a>
-        <a href="#" class="text-black mx-3"><i class="fab fa-linkedin fa-3x"></i></a>
-        <a href="#" class="text-black mx-3"><i class="fab fa-telegram fa-3x"></i></a>
-    </div>
-</section>
-<section id="how-it-works" class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">How It Works</h2>
-        <div class="row text-center">
-            <div class="col-md-3 mb-4">
-                <div class="icon-box mb-3">
-                    <i class="fas fa-wallet fa-3x text-primary"></i>
-                </div>
-                <h4>Connect Wallet</h4>
-                <p>Securely connect your wallet to get started.</p>
+        <!-- Social Media Links Section -->
+        <section id="social-media" class="py-5">
+            <div class="container text-center">
+                <h2 class="mb-4">Follow Us</h2>
+                <a href="#" class="text-black mx-3"><i class="fab fa-facebook fa-3x"></i></a>
+                <a href="#" class="text-black mx-3"><i class="fab fa-twitter fa-3x"></i></a>
+                <a href="#" class="text-black mx-3"><i class="fab fa-instagram fa-3x"></i></a>
+                <a href="#" class="text-black mx-3"><i class="fab fa-linkedin fa-3x"></i></a>
+                <a href="#" class="text-black mx-3"><i class="fab fa-telegram fa-3x"></i></a>
             </div>
-            <div class="col-md-3 mb-4">
-                <div class="icon-box mb-3">
-                    <i class="fas fa-hand-holding-usd fa-3x text-success"></i>
-                </div>
-                <h4>Make a Donation</h4>
-                <p>Send funds directly to the smart contract.</p>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="icon-box mb-3">
-                    <i class="fas fa-users fa-3x text-info"></i>
-                </div>
-                <h4>Refer Friends</h4>
-                <p>Invite up to 4 friends and earn rewards.</p>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="icon-box mb-3">
-                    <i class="fas fa-network-wired fa-3x text-warning"></i>
-                </div>
-                <h4>Grow Your Network</h4>
-                <p>Expand your network and increase rewards.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="connect-wallet" class="py-5 bg-light">
-    <div class="container text-center">
-        <h2 style="color: black; font-family: 'Roboto', sans-serif;">Connect Your Wallet</h2>
-        <button id="connectWalletBtn" class="btn btn-lg mt-3" style="background-color: orange; color: black; font-family: 'Roboto', sans-serif; border-radius: 50px; padding: 5px 15px;">Connect Wallet</button>
-        <div id="walletAddress" class="mt-3" style="color: black; font-family: 'Roboto', sans-serif;"></div>
-
-        <h4 class="mt-5" style="color: black; font-family: 'Roboto', sans-serif;">Make a Donation</h4>
-        <input type="number" id="donationAmount" class="form-control w-50 mx-auto mt-3" placeholder="Enter donation amount in USDT" style="color: black; font-family: 'Roboto', sans-serif;">
-        <button id="donateBtn" class="btn btn-lg mt-3" style="background-color: orange; color: black; font-family: 'Roboto', sans-serif; border-radius: 50px; padding: 5px 15px;">Donate</button>
-    </div>
-</section>
-
-<section id="signup" class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Create an Account</h2>
-        <form id="signupForm" class="w-75 mx-auto">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="First Name">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+        </section>
+        <section id="how-it-works" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-4">How It Works</h2>
+                <div class="row text-center">
+                    <div class="col-md-3 mb-4">
+                        <div class="icon-box mb-3">
+                            <i class="fas fa-wallet fa-3x text-primary"></i>
+                        </div>
+                        <h4>Connect Wallet</h4>
+                        <p>Securely connect your wallet to get started.</p>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="icon-box mb-3">
+                            <i class="fas fa-hand-holding-usd fa-3x text-success"></i>
+                        </div>
+                        <h4>Make a Donation</h4>
+                        <p>Send funds directly to the smart contract.</p>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="icon-box mb-3">
+                            <i class="fas fa-users fa-3x text-info"></i>
+                        </div>
+                        <h4>Refer Friends</h4>
+                        <p>Invite up to 4 friends and earn rewards.</p>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="icon-box mb-3">
+                            <i class="fas fa-network-wired fa-3x text-warning"></i>
+                        </div>
+                        <h4>Grow Your Network</h4>
+                        <p>Expand your network and increase rewards.</p>
+                    </div>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email">
+        </section>
+
+        <section id="connect-wallet" class="py-5 bg-light">
+            <div class="container text-center">
+                <h2 style="color: black; font-family: 'Roboto', sans-serif;">Connect Your Wallet</h2>
+                <button id="connectWalletBtn" class="btn btn-lg mt-3"
+                    style="background-color: orange; color: black; font-family: 'Roboto', sans-serif; border-radius: 50px; padding: 5px 15px;">Connect
+                    Wallet</button>
+                <div id="walletAddress" class="mt-3" style="color: black; font-family: 'Roboto', sans-serif;"></div>
+
+                <h4 class="mt-5" style="color: black; font-family: 'Roboto', sans-serif;">Make a Donation</h4>
+                <input type="number" id="donationAmount" class="form-control w-50 mx-auto mt-3"
+                    placeholder="Enter donation amount in USDT"
+                    style="color: black; font-family: 'Roboto', sans-serif;">
+                <button id="donateBtn" class="btn btn-lg mt-3"
+                    style="background-color: orange; color: black; font-family: 'Roboto', sans-serif; border-radius: 50px; padding: 5px 15px;">Donate</button>
+            </div>
+        </section>
+
+        <section id="signup" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-4">Create an Account</h2>
+                <form id="signupForm" class="w-75 mx-auto">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="country">Select Country</label>
+                            <select id="country" class="form-control">
+                                <option selected>Choose...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="referralCode">Referral Code</label>
+                            <input type="text" class="form-control" id="referralCode" placeholder="Referral Code"
+                                readonly>
+                        </div>
+                        <button class="btn btn-primary" onclick="generateReferralCode()">Generate Referral Code</button>
+                        <div class="form-group col-md-6">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="terms">
+                        <label class="form-check-label" for="terms">I agree with <a href="#">Privacy Policy</a> and <a
+                                href="#">Terms & Conditions</a></label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Create Account</button>
+                </form>
+            </div>
+        </section>
+        <section id="settings" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif;">Settings</h2>
+                <form class="w-50 mx-auto">
+                    <div class="form-group">
+                        <label for="username" style="color: black; font-family: 'Roboto', sans-serif;">Username</label>
+                        <input type="text" class="form-control" id="username" placeholder="Update your username"
+                            style="color: black; font-family: 'Roboto', sans-serif;">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" style="color: black; font-family: 'Roboto', sans-serif;">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Update your email"
+                            style="color: black; font-family: 'Roboto', sans-serif;">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" style="color: black; font-family: 'Roboto', sans-serif;">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Update your password"
+                            style="color: black; font-family: 'Roboto', sans-serif;">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block"
+                        style="background-color: black; color: white; font-family: 'Roboto', sans-serif;">Save
+                        Changes</button>
+                </form>
+            </div>
+        </section>
+        <section id="forgot-password" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif;">Forgot Password
+                </h2>
+                <form class="w-50 mx-auto" id="resetPasswordForm">
+                    <div class="form-group">
+                        <label for="resetEmail" style="color: black; font-family: 'Roboto', sans-serif;">Enter your
+                            email address</label>
+                        <input type="email" class="form-control" id="resetEmail" placeholder="Email Address" required
+                            style="color: black; font-family: 'Roboto', sans-serif;">
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-block"
+                        style="background-color: black; color: white; font-family: 'Roboto', sans-serif;"
+                        onmouseover="this.style.backgroundColor='orange';"
+                        onmouseout="this.style.backgroundColor='black';">Reset Password</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="faq" class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-4">FAQ</h2>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <h5>What is this program about?</h5>
+                        <p>Our program allows you to donate and build a network that rewards you and your referrals.</p>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <h5>How do I get started?</h5>
+                        <p>Simply connect your wallet, make a donation, and start referring friends.</p>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <h5>How are donations distributed?</h5>
+                        <p>Donations are sent directly to the smart contract and distributed as rewards up to 7 levels.
+                        </p>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <h5>Can I track my earnings?</h5>
+                        <p>Yes, your wallet will reflect all rewards automatically.</p>
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="country">Select Country</label>
-                    <select id="country" class="form-control">
-                        <option selected>Choose...</option>
-                    </select>
-                </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="referralCode">Referral Code</label>
-                    <input type="text" class="form-control" id="referralCode" placeholder="Referral Code" readonly>
-                </div>
-                <button class="btn btn-primary" onclick="generateReferralCode()">Generate Referral Code</button>
-                <div class="form-group col-md-6">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
-            </div>
-            <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" id="terms">
-                <label class="form-check-label" for="terms">I agree with <a href="#">Privacy Policy</a> and <a href="#">Terms & Conditions</a></label>
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Create Account</button>
-        </form>
-    </div>
-</section>
-<section id="settings" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif;">Settings</h2>
-        <form class="w-50 mx-auto">
-            <div class="form-group">
-                <label for="username" style="color: black; font-family: 'Roboto', sans-serif;">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Update your username" style="color: black; font-family: 'Roboto', sans-serif;">
-            </div>
-            <div class="form-group">
-                <label for="email" style="color: black; font-family: 'Roboto', sans-serif;">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Update your email" style="color: black; font-family: 'Roboto', sans-serif;">
-            </div>
-            <div class="form-group">
-                <label for="password" style="color: black; font-family: 'Roboto', sans-serif;">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Update your password" style="color: black; font-family: 'Roboto', sans-serif;">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block" style="background-color: black; color: white; font-family: 'Roboto', sans-serif;">Save Changes</button>
-        </form>
-    </div>
-</section>
-<section id="forgot-password" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif;">Forgot Password</h2>
-        <form class="w-50 mx-auto" id="resetPasswordForm">
-            <div class="form-group">
-                <label for="resetEmail" style="color: black; font-family: 'Roboto', sans-serif;">Enter your email address</label>
-                <input type="email" class="form-control" id="resetEmail" placeholder="Email Address" required style="color: black; font-family: 'Roboto', sans-serif;">
-            </div>
-            <button type="submit" class="btn btn-warning btn-block" style="background-color: black; color: white; font-family: 'Roboto', sans-serif;" onmouseover="this.style.backgroundColor='orange';" onmouseout="this.style.backgroundColor='black';">Reset Password</button>
-        </form>
-    </div>
-</section>
+        </section>
 
-<section id="faq" class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">FAQ</h2>
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <h5>What is this program about?</h5>
-                <p>Our program allows you to donate and build a network that rewards you and your referrals.</p>
-            </div>
-            <div class="col-md-6 mb-4">
-                <h5>How do I get started?</h5>
-                <p>Simply connect your wallet, make a donation, and start referring friends.</p>
-            </div>
-            <div class="col-md-6 mb-4">
-                <h5>How are donations distributed?</h5>
-                <p>Donations are sent directly to the smart contract and distributed as rewards up to 7 levels.</p>
-            </div>
-            <div class="col-md-6 mb-4">
-                <h5>Can I track my earnings?</h5>
-                <p>Yes, your wallet will reflect all rewards automatically.</p>
-            </div>
-        </div>
-    </div>
-</section>
+        <footer class="bg-dark text-white py-3 text-center">
+            <p>&copy; 2025 EmpowerNet. All Rights Reserved.</p>
+        </footer>
+        <script>
+            // Array of countries
+            const countries = [
+                "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia",
+                "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium",
+                "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria",
+                "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic",
+                "Chad", "Chile", "China", "Colombia", "Comoros", "Congo (Democratic Republic)", "Congo (Republic)",
+                "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica",
+                "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini",
+                "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece",
+                "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland",
+                "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan",
+                "Kazakhstan", "Kenya", "Kiribati", "Korea (North)", "Korea (South)", "Kosovo", "Kuwait", "Kyrgyzstan",
+                "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
+                "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania",
+                "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco",
+                "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua",
+                "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama",
+                "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia",
+                "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa",
+                "San Marino", "São Tomé and Príncipe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone",
+                "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain",
+                "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand",
+                "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
+                "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan",
+                "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+            ];
 
-<footer class="bg-dark text-white py-3 text-center">
-    <p>&copy; 2025 EmpowerNet. All Rights Reserved.</p>
-</footer>
-<script>
-    // Array of countries
-    const countries = [
-        "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", 
-        "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", 
-        "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", 
-        "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", 
-        "Chad", "Chile", "China", "Colombia", "Comoros", "Congo (Democratic Republic)", "Congo (Republic)", 
-        "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", 
-        "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", 
-        "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", 
-        "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", 
-        "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", 
-        "Kazakhstan", "Kenya", "Kiribati", "Korea (North)", "Korea (South)", "Kosovo", "Kuwait", "Kyrgyzstan", 
-        "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", 
-        "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", 
-        "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", 
-        "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", 
-        "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", 
-        "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", 
-        "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", 
-        "San Marino", "São Tomé and Príncipe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", 
-        "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", 
-        "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", 
-        "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", 
-        "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", 
-        "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
-    ];
+            // Populate the dropdown
+            const countryDropdown = document.getElementById("country");
+            countries.forEach(country => {
+                const option = document.createElement("option");
+                option.value = country;
+                option.textContent = country;
+                countryDropdown.appendChild(option);
+            });
+        </script>
+        <script>
+            const apiUrl = "https://api.empowernet.tech";
 
-    // Populate the dropdown
-    const countryDropdown = document.getElementById("country");
-    countries.forEach(country => {
-        const option = document.createElement("option");
-        option.value = country;
-        option.textContent = country;
-        countryDropdown.appendChild(option);
-    });
-</script>
-<script>
-    const apiUrl = "https://api.empowernet.tech";
+            // Populate country dropdown
+            const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo (Democratic Republic)", "Congo (Republic)", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea (North)", "Korea (South)", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "São Tomé and Príncipe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"];
 
-    // Populate country dropdown
-    const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo (Democratic Republic)", "Congo (Republic)", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea (North)", "Korea (South)", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "São Tomé and Príncipe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"];
-
-    const countryDropdown = document.getElementById("country");
-    countries.forEach(country => {
-        const option = document.createElement("option");
-        option.value = country;
-        option.textContent = country;
-        countryDropdown.appendChild(option);
-    });
-
-    // Base API URL
-    const apiUrl = "https://api.empowernet.tech";
-    // Update with your actual API endpoint
-
-// Sign-Up Handler
-$("#signupForm").on("submit", function (e) {
-    e.preventDefault();
-    const email = $("#email").val().trim();
-    const password = $("#password").val().trim();
-
-    if (!email || !password) {
-        alert("Please fill out all fields.");
-        return;
-    }
-
-    $.post(`${apiUrl}/register`, { email, password })
-        .done(function (response) {
-            alert("Registration successful! Check your email for confirmation and referral link.");
-            // Store the email and password locally for login purposes
-            localStorage.setItem("signupEmail", email);
-            localStorage.setItem("signupPassword", password);
-        })
-        .fail(function (error) {
-            const errorMessage = error.responseJSON?.message || "An unknown error occurred.";
-            alert("Error: " + errorMessage);
-        });
-});
-
-// Login Handler
-$("#loginForm").on("submit", function (e) {
-    e.preventDefault();
-    const email = $("#loginEmail").val().trim();
-    const password = $("#loginPassword").val().trim();
-
-    if (!email || !password) {
-        alert("Please enter your email and password.");
-        return;
-    }
-
-    $.post(`${apiUrl}/login`, { email, password })
-        .done(function (response) {
-            $("#login").hide();
-            $("#dashboard").show();
-            $("#referralLink").text(`Your referral link: ${response.referralLink}`);
-            alert("Login successful!");
-        })
-        .fail(function (error) {
-            const errorMessage = error.responseJSON?.message || "An unknown error occurred.";
-            alert("Error: " + errorMessage);
-        });
-});
-</script>
-<script>
-    const bscMainnet = {
-        chainId: "0x38", // Binance Smart Chain Mainnet
-        chainName: "Binance Smart Chain Mainnet",
-        rpcUrls: ["https://bsc-dataseed.binance.org/"],
-        nativeCurrency: {
-            name: "BNB",
-            symbol: "BNB",
-            decimals: 18,
-        },
-        blockExplorerUrls: ["https://bscscan.com/"],
-    };
-
-    // Contract ABI
-    const abi = [
-        {
-            "inputs": [
-                { "internalType": "address", "name": "_usdtAddress", "type": "address" },
-                { "internalType": "address", "name": "_admin", "type": "address" }
-            ],
-            "stateMutability": "nonpayable",
-            "type": "constructor"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                { "indexed": true, "internalType": "address", "name": "donor", "type": "address" },
-                { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" }
-            ],
-            "name": "DonationReceived",
-            "type": "event"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                { "indexed": true, "internalType": "address", "name": "user", "type": "address" },
-                { "indexed": true, "internalType": "address", "name": "upline", "type": "address" }
-            ],
-            "name": "UserRegistered",
-            "type": "event"
-        },
-        {
-            "inputs": [],
-            "name": "MINIMUM_DONATION",
-            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "admin",
-            "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "bep20AdminWallet",
-            "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [{ "internalType": "uint256", "name": "_amount", "type": "uint256" }],
-            "name": "donate",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "emergencyWithdraw",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [{ "internalType": "address", "name": "_user", "type": "address" }],
-            "name": "getDownlines",
-            "outputs": [{ "internalType": "address[]", "name": "", "type": "address[]" }],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [{ "internalType": "address", "name": "_upline", "type": "address" }],
-            "name": "register",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-            "name": "registeredUsers",
-            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "usdtAddress",
-            "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-            "name": "users",
-            "outputs": [{ "internalType": "address", "name": "upline", "type": "address" }],
-            "stateMutability": "view",
-            "type": "function"
-        }
-    ];
-
-    const contractAddress = '0x293577B0d791244C1868f0BC4a5a32F1411625Bd'; // Your contract address
-
-    async function addBscMainnet() {
-        if (window.ethereum) {
-            try {
-                await window.ethereum.request({
-                    method: "wallet_addEthereumChain",
-                    params: [bscMainnet],
-                });
-                alert("Binance Smart Chain Mainnet added to MetaMask!");
-            } catch (error) {
-                console.error("Error adding Binance Smart Chain:", error);
-            }
-        } else {
-            alert("MetaMask not detected. Install it to proceed.");
-        }
-    }
-
-    async function switchToBscMainnet() {
-        if (window.ethereum) {
-            try {
-                await window.ethereum.request({
-                    method: "wallet_switchEthereumChain",
-                    params: [{ chainId: "0x38" }],
-                });
-                alert("Switched to Binance Smart Chain Mainnet!");
-            } catch (error) {
-                if (error.code === 4902) {
-                    await addBscMainnet();
-                } else {
-                    console.error("Error switching network:", error);
-                }
-            }
-        }
-    }
-
-    document.getElementById('connectWalletBtn').addEventListener('click', async () => {
-        if (window.ethereum) {
-            web3 = new Web3(window.ethereum);
-            try {
-                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-                userAccount = accounts[0];
-                const chainId = await ethereum.request({ method: 'eth_chainId' });
-                if (chainId !== "0x38") {
-                    await switchToBscMainnet();
-                }
-                document.getElementById('walletAddress').innerText = `Connected: ${userAccount}`;
-            } catch (error) {
-                console.error('Wallet connection failed:', error);
-            }
-        } else {
-            alert('No Ethereum wallet detected. Install MetaMask or Trust Wallet.');
-        }
-    });
-
-    document.getElementById('donateBtn').addEventListener('click', async () => {
-        const amount = document.getElementById('donationAmount').value;
-        if (!amount || isNaN(amount) || amount <= 0) {
-            alert('Enter valid donation amount.');
-            return;
-        }
-        if (!userAccount) {
-            alert('Connect your wallet first.');
-            return;
-        }
-        try {
-            const contract = new web3.eth.Contract(abi, contractAddress);
-            const usdtAmount = web3.utils.toWei(amount, 'ether');
-            await contract.methods.donate(usdtAmount).send({ from: userAccount });
-            alert('Donation successful!');
-        } catch (error) {
-            console.error('Donation failed:', error);
-            alert('Transaction failed.');
-        }
-    });
-</script>
-<script>
-
-    const SHARED_IP = "http://198.187.29.23";
-
-    let loggedInUser = null;
-
-    document.getElementById('loginForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value.trim();
-        const password = document.getElementById('loginPassword').value.trim();
-
-        if (!email || !password) {
-            alert('Please provide valid login details.');
-            return;
-        }
-
-        const referralCode = btoa(email).slice(0, 8);
-        const referralLink = `${SHARED_IP}/?ref=${referralCode}`;
-
-        try {
-            const response = await fetch(`${LOGIN_API_IP}/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password, referralCode }),
+            const countryDropdown = document.getElementById("country");
+            countries.forEach(country => {
+                const option = document.createElement("option");
+                option.value = country;
+                option.textContent = country;
+                countryDropdown.appendChild(option);
             });
 
-            const result = await response.json();
+            // Base API URL
+            const apiUrl = "https://api.empowernet.tech";
+            // Update with your actual API endpoint
 
-            if (result.success) {
-                loggedInUser = { email, referralCode };
-                document.getElementById('referralLink').innerHTML = `
+            // Sign-Up Handler
+            $("#signupForm").on("submit", function (e) {
+                e.preventDefault();
+                const email = $("#email").val().trim();
+                const password = $("#password").val().trim();
+
+                if (!email || !password) {
+                    alert("Please fill out all fields.");
+                    return;
+                }
+
+                $.post(`${apiUrl}/register`, { email, password })
+                    .done(function (response) {
+                        alert("Registration successful! Check your email for confirmation and referral link.");
+                        // Store the email and password locally for login purposes
+                        localStorage.setItem("signupEmail", email);
+                        localStorage.setItem("signupPassword", password);
+                    })
+                    .fail(function (error) {
+                        const errorMessage = error.responseJSON?.message || "An unknown error occurred.";
+                        alert("Error: " + errorMessage);
+                    });
+            });
+
+            // Login Handler
+            $("#loginForm").on("submit", function (e) {
+                e.preventDefault();
+                const email = $("#loginEmail").val().trim();
+                const password = $("#loginPassword").val().trim();
+
+                if (!email || !password) {
+                    alert("Please enter your email and password.");
+                    return;
+                }
+
+                $.post(`${apiUrl}/login`, { email, password })
+                    .done(function (response) {
+                        $("#login").hide();
+                        $("#dashboard").show();
+                        $("#referralLink").text(`Your referral link: ${response.referralLink}`);
+                        alert("Login successful!");
+                    })
+                    .fail(function (error) {
+                        const errorMessage = error.responseJSON?.message || "An unknown error occurred.";
+                        alert("Error: " + errorMessage);
+                    });
+            });
+        </script>
+        <script>
+            const bscMainnet = {
+                chainId: "0x38", // Binance Smart Chain Mainnet
+                chainName: "Binance Smart Chain Mainnet",
+                rpcUrls: ["https://bsc-dataseed.binance.org/"],
+                nativeCurrency: {
+                    name: "BNB",
+                    symbol: "BNB",
+                    decimals: 18,
+                },
+                blockExplorerUrls: ["https://bscscan.com/"],
+            };
+
+            // Contract ABI
+            const abi = [
+                {
+                    "inputs": [
+                        { "internalType": "address", "name": "_usdtAddress", "type": "address" },
+                        { "internalType": "address", "name": "_admin", "type": "address" }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "constructor"
+                },
+                {
+                    "anonymous": false,
+                    "inputs": [
+                        { "indexed": true, "internalType": "address", "name": "donor", "type": "address" },
+                        { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" }
+                    ],
+                    "name": "DonationReceived",
+                    "type": "event"
+                },
+                {
+                    "anonymous": false,
+                    "inputs": [
+                        { "indexed": true, "internalType": "address", "name": "user", "type": "address" },
+                        { "indexed": true, "internalType": "address", "name": "upline", "type": "address" }
+                    ],
+                    "name": "UserRegistered",
+                    "type": "event"
+                },
+                {
+                    "inputs": [],
+                    "name": "MINIMUM_DONATION",
+                    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "admin",
+                    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "bep20AdminWallet",
+                    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [{ "internalType": "uint256", "name": "_amount", "type": "uint256" }],
+                    "name": "donate",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "emergencyWithdraw",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [{ "internalType": "address", "name": "_user", "type": "address" }],
+                    "name": "getDownlines",
+                    "outputs": [{ "internalType": "address[]", "name": "", "type": "address[]" }],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [{ "internalType": "address", "name": "_upline", "type": "address" }],
+                    "name": "register",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+                    "name": "registeredUsers",
+                    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "usdtAddress",
+                    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+                    "name": "users",
+                    "outputs": [{ "internalType": "address", "name": "upline", "type": "address" }],
+                    "stateMutability": "view",
+                    "type": "function"
+                }
+            ];
+
+            const contractAddress = '0x293577B0d791244C1868f0BC4a5a32F1411625Bd'; // Your contract address
+
+            async function addBscMainnet() {
+                if (window.ethereum) {
+                    try {
+                        await window.ethereum.request({
+                            method: "wallet_addEthereumChain",
+                            params: [bscMainnet],
+                        });
+                        alert("Binance Smart Chain Mainnet added to MetaMask!");
+                    } catch (error) {
+                        console.error("Error adding Binance Smart Chain:", error);
+                    }
+                } else {
+                    alert("MetaMask not detected. Install it to proceed.");
+                }
+            }
+
+            async function switchToBscMainnet() {
+                if (window.ethereum) {
+                    try {
+                        await window.ethereum.request({
+                            method: "wallet_switchEthereumChain",
+                            params: [{ chainId: "0x38" }],
+                        });
+                        alert("Switched to Binance Smart Chain Mainnet!");
+                    } catch (error) {
+                        if (error.code === 4902) {
+                            await addBscMainnet();
+                        } else {
+                            console.error("Error switching network:", error);
+                        }
+                    }
+                }
+            }
+
+            document.getElementById('connectWalletBtn').addEventListener('click', async () => {
+                if (window.ethereum) {
+                    web3 = new Web3(window.ethereum);
+                    try {
+                        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                        userAccount = accounts[0];
+                        const chainId = await ethereum.request({ method: 'eth_chainId' });
+                        if (chainId !== "0x38") {
+                            await switchToBscMainnet();
+                        }
+                        document.getElementById('walletAddress').innerText = `Connected: ${userAccount}`;
+                    } catch (error) {
+                        console.error('Wallet connection failed:', error);
+                    }
+                } else {
+                    alert('No Ethereum wallet detected. Install MetaMask or Trust Wallet.');
+                }
+            });
+
+            document.getElementById('donateBtn').addEventListener('click', async () => {
+                const amount = document.getElementById('donationAmount').value;
+                if (!amount || isNaN(amount) || amount <= 0) {
+                    alert('Enter valid donation amount.');
+                    return;
+                }
+                if (!userAccount) {
+                    alert('Connect your wallet first.');
+                    return;
+                }
+                try {
+                    const contract = new web3.eth.Contract(abi, contractAddress);
+                    const usdtAmount = web3.utils.toWei(amount, 'ether');
+                    await contract.methods.donate(usdtAmount).send({ from: userAccount });
+                    alert('Donation successful!');
+                } catch (error) {
+                    console.error('Donation failed:', error);
+                    alert('Transaction failed.');
+                }
+            });
+        </script>
+        <script>
+
+            const SHARED_IP = "http://198.187.29.23";
+
+            let loggedInUser = null;
+
+            document.getElementById('loginForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value.trim();
+
+                if (!email || !password) {
+                    alert('Please provide valid login details.');
+                    return;
+                }
+
+                const referralCode = btoa(email).slice(0, 8);
+                const referralLink = `${SHARED_IP}/?ref=${referralCode}`;
+
+                try {
+                    const response = await fetch(`${LOGIN_API_IP}/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email, password, referralCode }),
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        loggedInUser = { email, referralCode };
+                        document.getElementById('referralLink').innerHTML = `
                     <h5>Your Referral Link:</h5>
                     <a href="${referralLink}" target="_blank" style="color: lightblue;">${referralLink}</a>
                 `;
-                alert('Login successful!');
-            } else {
-                alert(`Login failed: ${result.message}`);
-            }
-        } catch (error) {
-            console.error('Error during login:', error);
-            alert('An error occurred. Please try again later.');
-        }
-    });
-
-    const autoRegister = async () => {
-    try {
-        const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-        const userAddress = accounts[0];
-        const isRegistered = await contract.methods.isRegistered(userAddress).call();
-
-        if (!isRegistered) {
-            await contract.methods.registerUser().send({ from: userAddress });
-            alert("User registered successfully!");
-        }
-    } catch (error) {
-        console.error("Error during auto-registration:", error);
-    }
-};
-
-// Call autoRegister on wallet connect
-$("#connectWallet").on("click", async () => {
-    await autoRegister();
-});
-
-    document.getElementById('donationForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-        if (!loggedInUser) {
-            alert('You must be logged in to make a donation.');
-            return;
-        }
-
-        const amount = document.getElementById('donationAmount').value.trim();
-
-        if (!amount || isNaN(amount) || amount <= 0) {
-            alert('Please enter a valid donation amount.');
-            return;
-        }
-
-        try {
-            const response = await fetch(`${LOGIN_API_IP}/donate`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: loggedInUser.email,
-                    amount,
-                }),
+                        alert('Login successful!');
+                    } else {
+                        alert(`Login failed: ${result.message}`);
+                    }
+                } catch (error) {
+                    console.error('Error during login:', error);
+                    alert('An error occurred. Please try again later.');
+                }
             });
 
-            const result = await response.json();
+            const autoRegister = async () => {
+                try {
+                    const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+                    const userAddress = accounts[0];
+                    const isRegistered = await contract.methods.isRegistered(userAddress).call();
 
-            if (result.success) {
-                alert('Donation successful!');
-            } else {
-                alert(`Donation failed: ${result.message}`);
+                    if (!isRegistered) {
+                        await contract.methods.registerUser().send({ from: userAddress });
+                        alert("User registered successfully!");
+                    }
+                } catch (error) {
+                    console.error("Error during auto-registration:", error);
+                }
+            };
+
+            // Call autoRegister on wallet connect
+            $("#connectWallet").on("click", async () => {
+                await autoRegister();
+            });
+
+            document.getElementById('donationForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+                if (!loggedInUser) {
+                    alert('You must be logged in to make a donation.');
+                    return;
+                }
+
+                const amount = document.getElementById('donationAmount').value.trim();
+
+                if (!amount || isNaN(amount) || amount <= 0) {
+                    alert('Please enter a valid donation amount.');
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${LOGIN_API_IP}/donate`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: loggedInUser.email,
+                            amount,
+                        }),
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alert('Donation successful!');
+                    } else {
+                        alert(`Donation failed: ${result.message}`);
+                    }
+                } catch (error) {
+                    console.error('Error during donation:', error);
+                    alert('An error occurred. Please try again later.');
+                }
+            });
+        </script>
+        <script>
+            const apiUrl = "https://api.empowernet.tech";
+
+            // Fetch prices from CoinGecko
+            async function fetchPrices() {
+                try {
+                    const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,dogecoin,litecoin,xrp,tether,usd-coin,binance-usd,chainlink&vs_currencies=usd", {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                        }
+                    });
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    const data = await response.json();
+
+                    document.getElementById("btc-price").textContent = `$${data.bitcoin.usd}`;
+                    document.getElementById("eth-price").textContent = `$${data.ethereum.usd}`;
+                    document.getElementById("bnb-price").textContent = `$${data.binancecoin.usd}`;
+                    document.getElementById("doge-price").textContent = `$${data.dogecoin.usd}`;
+                    document.getElementById("ltc-price").textContent = `$${data.litecoin.usd}`;
+                } catch (error) {
+                    console.error("Error fetching prices:", error);
+                }
             }
-        } catch (error) {
-            console.error('Error during donation:', error);
-            alert('An error occurred. Please try again later.');
-        }
-    });
-</script>
-<script>
-    const apiUrl = "https://api.empowernet.tech";
-
-    // Fetch prices from CoinGecko
-    async function fetchPrices() {
-    try {
-        const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,dogecoin,litecoin,xrp,tether,usd-coin,binance-usd,chainlink&vs_currencies=usd", {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-            }
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-
-        document.getElementById("btc-price").textContent = `$${data.bitcoin.usd}`;
-        document.getElementById("eth-price").textContent = `$${data.ethereum.usd}`;
-        document.getElementById("bnb-price").textContent = `$${data.binancecoin.usd}`;
-        document.getElementById("doge-price").textContent = `$${data.dogecoin.usd}`;
-        document.getElementById("ltc-price").textContent = `$${data.litecoin.usd}`;
-    } catch (error) {
-        console.error("Error fetching prices:", error);
-    }
-}
 
 
-    // Update prices every minute
-    fetchPrices();
-    setInterval(fetchPrices, 60000);
-</script>
-</body>
+            // Update prices every minute
+            fetchPrices();
+            setInterval(fetchPrices, 60000);
+        </script>
+    </body>
 
 </html>
