@@ -514,7 +514,8 @@
     });
 
     // Base API URL
-const apiUrl = "https://empowernet.tech/api"; // Update with your actual API endpoint
+    const apiUrl = "https://api.empowernet.tech";
+    // Update with your actual API endpoint
 
 // Sign-Up Handler
 $("#signupForm").on("submit", function (e) {
@@ -819,12 +820,12 @@ $("#connectWallet").on("click", async () => {
     await autoRegister();
 });
 
-    // document.getElementById('donationForm').addEventListener('submit', async function (e) {
-    //     e.preventDefault();
-    //     if (!loggedInUser) {
-    //         alert('You must be logged in to make a donation.');
-    //         return;
-    //     }
+    document.getElementById('donationForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (!loggedInUser) {
+            alert('You must be logged in to make a donation.');
+            return;
+        }
 
         const amount = document.getElementById('donationAmount').value.trim();
 
