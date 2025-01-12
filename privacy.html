@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="PRXmcuJRxNKOng8uh4PkYeHqgT57v20xgggz2aJE">
+    <title>EmpowerNet - How It Works</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Animated Gradient Background */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: linear-gradient(120deg, #1e3c72, #2a5298, #2b5876);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Blockchain Overlay */
+        #blockchain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: url('https://i.imgur.com/3bfB1ij.png');
+            /* A subtle blockchain network image */
+            background-size: cover;
+            opacity: 0.1;
+        }
+
+        /* Container Styling */
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-top: 10%;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: rgb(171, 184, 196);
+            border: 1px solid white;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Price Ticker Styling */
+        .price-ticker {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            background: rgba(32, 8, 32, 0.7);
+            color: white;
+            padding: 10px;
+            /* Add some padding for better spacing */
+            margin: 0;
+            font-size: 1rem;
+            /* Default font size */
+            overflow: hidden;
+            /* Ensure content doesn't overflow */
+        }
+
+        .price-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px;
+        }
+
+        .price-logo {
+            width: 30px;
+            height: 30px;
+        }
+
+        .price-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .price-value {
+            font-size: 1rem;
+            color: #4caf50;
+        }
+
+        @keyframes scrollTicker {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Blockchain Network Overlay -->
+    <div id="blockchain-overlay"></div>
+    </head>
+
+    <body>
+
+        <header>
+            <nav class="navbar navbar-expand-lg" style="background-color: black;">
+                <div class="container">
+                    <a class="navbar-brand" href="#" style="color: white;">EmpowerNet</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon" style="color: white;"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="index.html" style="color: white;">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="about us.html" style="color: white;">About Us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="contact us.html"
+                                    style="color: white;">Contact Us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="privacy.html"
+                                    style="color: white;">privacy-policy</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="create.html"
+                                        style="color: white;">Create Account</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="connect.html"
+                                            style="color: white;">Connect Your Wallet</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="settings.html"
+                                                style="color: white;">Settings</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+        </header>
+
+        <section id="hero" class="py-5 text-white text-center"
+            style="background: linear-gradient(45deg, #58cce9, #58cce9, #58cce9); background-size: 400% 400%; animation: gradientBG 15s ease infinite;">
+            <style>
+                @keyframes gradientBG {
+                    0% {
+                        background-position: 0% 50%;
+                    }
+
+                    50% {
+                        background-position: 100% 50%;
+                    }
+
+                    100% {
+                        background-position: 0% 50%;
+                    }
+                }
+            </style>
+             <section id="privacy-policy" class="py-5 bg-light">
+                <div class="container">
+                    <h2 class="text-center mb-4" style="color: black; font-family: 'Roboto', sans-serif; font-weight: 700;">
+                        Privacy Policy</h2>
+                    <p style="color: black; font-family: 'Roboto', sans-serif; font-size: 1rem; line-height: 1.6;">
+                        At <strong>EmpowerNet</strong>, we are committed to safeguarding your privacy and ensuring that your
+                        personal data remains secure.
+                        We adhere to strict data protection standards and comply with all relevant privacy laws to maintain
+                        your trust.
+                    </p>
+    
+                    <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">What Information We
+                        Collect</h4>
+                    <p style="color: black;"><strong>Personal Information:</strong> When you register, we collect your name,
+                        email address, and other necessary details to create and manage your account.</p>
+                    <p style="color: black;"><strong>Transaction Data:</strong> Any donations, payments, or transactions you
+                        make on our platform are securely logged to ensure transparency and accountability.</p>
+                    <p style="color: black;"><strong>Technical Information:</strong> We may collect information about your
+                        device, browser, and IP address to enhance the security and functionality of our platform.</p>
+    
+                    <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">How We Use Your
+                        Information</h4>
+                    <p style="color: black;"><strong>Account Management:</strong> To manage user accounts, process
+                        transactions, and provide personalized services.</p>
+                    <p style="color: black;"><strong>Communication:</strong> To send you updates, respond to your queries,
+                        and notify you about changes to our services.</p>
+                    <p style="color: black;"><strong>Security:</strong> To detect, prevent, and address any fraudulent
+                        activities or breaches.</p>
+    
+                    <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Your Privacy Is Our
+                        Priority</h4>
+                    <p style="color: black;"><strong>No Unauthorized Sharing:</strong> EmpowerNet does not share, sell, or
+                        rent your personal information to third parties without your explicit consent.</p>
+                    <p style="color: black;"><strong>Secure Data Handling:</strong> We use advanced encryption and secure
+                        servers to protect your data from unauthorized access.</p>
+                    <p style="color: black;"><strong>Limited Access:</strong> Only authorized personnel have access to your
+                        information, and they are bound by strict confidentiality agreements.</p>
+    
+                    <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Your Rights</h4>
+                    <p style="color: black;"><strong>Access and Control:</strong> You can review and update your personal
+                        information at any time.</p>
+                    <p style="color: black;"><strong>Data Deletion:</strong> You can request the deletion of your data from
+                        our systems, subject to legal and regulatory requirements.</p>
+                    <p style="color: black;"><strong>Consent Management:</strong> You have the right to manage your
+                        communication preferences and opt out of non-essential emails.</p>
+    
+                    <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Cookies and Tracking
+                        Technologies</h4>
+                    <p style="color: black;">We may use cookies to improve your experience on our platform. Cookies help us:
+                    </p>
+                    <ul style="color: black; font-family: 'Roboto', sans-serif; font-size: 1rem; line-height: 1.6;">
+                        <li>Analyze user behavior to enhance our services.</li>
+                        <li>Remember your preferences for a smoother experience.</li>
+                    </ul>
+                    <p style="color: black;">You can control cookie preferences through your browser settings.</p>
+    
+                    <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Third-Party Services</h4>
+                    <p style="color: black;">To provide a seamless user experience, we may partner with trusted third-party
+                        services for payment processing, analytics, or other functionalities. These partners are
+                        contractually obligated to protect your data and use it solely for the agreed-upon purposes.</p>
+    
+                    <h4 style="color: black; font-family: 'Roboto', sans-serif; font-weight: 600;">Policy Updates</h4>
+                    <p style="color: black;">Our privacy policy may be updated periodically to reflect changes in our
+                        services or legal requirements. We encourage you to review this policy regularly to stay informed.
+                    </p>
+    
+                    <p style="color: black; font-family: 'Roboto', sans-serif; font-size: 1rem;">For any questions or
+                        concerns about our privacy practices, feel free to contact us at <a
+                            href="mailto:support@empowernet.tech"
+                            style="color: #007bff; text-decoration: none;">support@empowernet.tech</a>.</p>
+                </div>
+            </section>
+    
